@@ -3,6 +3,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TextBuddy", "TextBuddy\TextBuddy.vcxproj", "{A8638EC4-DAD2-48E8-B243-A4953AA7B289}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TextBuddyTest", "LibraryTest\LibraryTest.vcxproj", "{258096DD-5CC6-47DE-8C60-EF9818DAD552}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Main", "Main\Main.vcxproj", "{EFA7028E-6702-46F9-9BBA-163552C5F009}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -13,6 +17,14 @@ Global
 		{A8638EC4-DAD2-48E8-B243-A4953AA7B289}.Debug|Win32.Build.0 = Debug|Win32
 		{A8638EC4-DAD2-48E8-B243-A4953AA7B289}.Release|Win32.ActiveCfg = Release|Win32
 		{A8638EC4-DAD2-48E8-B243-A4953AA7B289}.Release|Win32.Build.0 = Release|Win32
+		{258096DD-5CC6-47DE-8C60-EF9818DAD552}.Debug|Win32.ActiveCfg = Debug|Win32
+		{258096DD-5CC6-47DE-8C60-EF9818DAD552}.Debug|Win32.Build.0 = Debug|Win32
+		{258096DD-5CC6-47DE-8C60-EF9818DAD552}.Release|Win32.ActiveCfg = Release|Win32
+		{258096DD-5CC6-47DE-8C60-EF9818DAD552}.Release|Win32.Build.0 = Release|Win32
+		{EFA7028E-6702-46F9-9BBA-163552C5F009}.Debug|Win32.ActiveCfg = Debug|Win32
+		{EFA7028E-6702-46F9-9BBA-163552C5F009}.Debug|Win32.Build.0 = Debug|Win32
+		{EFA7028E-6702-46F9-9BBA-163552C5F009}.Release|Win32.ActiveCfg = Release|Win32
+		{EFA7028E-6702-46F9-9BBA-163552C5F009}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
