@@ -1,3 +1,24 @@
+/** This is used to execute the commands given by the user on the command line
+interface.
+* It is assumed that there is no existing file and a new file is executed each time.
+* The file is also saved after each user operation. The command format is given by
+* the example interaction below:
+Welcome to TextBuddy. mytestfile.txt is ready to use.
+command: add Little Brown Fox
+command: add jumped over the lazy dog
+command: add jumped over the rainbow
+command: display
+command: delete 2
+command: display
+command: add then it runs away
+command: clear
+command: display
+command: add Little White Fox
+command: display
+command: exit
+* @author Kevin Christian
+*/
+
 #include <iostream>
 #include <vector>
 #include <fstream>
@@ -56,7 +77,7 @@ void processCommand(vector<string>& TextVector, string argv, string command)
 {
 	string text;
 	int textNumber;
-	while(command != "exit")  {
+	while(command != "exit") {
 		if(command == "add") {
 			getline(cin, text);
 			addText(text, TextVector, argv);
