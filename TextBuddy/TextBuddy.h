@@ -17,6 +17,8 @@ public:
 	void processCommand(std::string command);
 	void finalizeText();
 	void sortText();
+	std::vector<std::string> searchText(std::string word);
+	void displaySearch(std::vector<std::string> searchVector);
 	TextBuddy(std::string argv);
 	std::vector<std::string> getTextVector();
 };

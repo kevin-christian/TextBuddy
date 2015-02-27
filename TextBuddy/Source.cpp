@@ -87,12 +87,53 @@ void TextBuddy::clearText()
 	cout<<"all content deleted from "<< fileName <<endl ;
 }
 
-void TextBuddy::sortText()
+/*void TextBuddy::sortText()
 {
 	if(!TextVector.empty()) {
-		sort(TextVector.begin(), TextVector.end());
+		sort(TextVector.begin(), TextVector.end(), [](string a, string b) -> bool {
+			for(int i=0; i != a.size() && i != b.size() ; ++i){ 
+				if(tolower(a[i]) < tolower(b[i])){
+					return true;
+				}
+				else if(tolower(a[i]) == tolower(b[i])){
+					continue;
+				}
+				else{
+					return false;
+				}
+			}
+			return true;
+		});
 	}
 	displayText();
+}*/
+
+vector<string> TextBuddy::searchText(string word)
+{
+	vector<string> searchVector;
+	for(int textNumber=0; textNumber != TextVector.size(); ++textNumber){
+		unsigned int checkWord = 0;
+		checkWord = TextVector[textNumber].find(word);
+		if(checkWord != string::npos){
+			searchVector.push_back(TextVector[textNumber]);
+		}
+	}
+	return searchVector;
+}
+
+void TextBuddy::displaySearch(vector<string> searchVector)
+{
+	if(!searchVector.empty()){
+		vector<string>::iterator iter;
+		int textNumber=1;
+		for(iter=searchVector.begin(); iter!=searchVector.end(); ++iter){
+		cout << textNumber << "." << *iter << endl;
+		++textNumber;
+		}
+	}
+	else{
+		cout <<"not found" << endl;
+	}
 }
 
 void TextBuddy::processCommand(string command)
@@ -114,8 +155,13 @@ void TextBuddy::processCommand(string command)
 		else if(command == "clear"){
 			clearText();
 		}
-		else if(command == "sort"){
+		/*else if(command == "sort"){
 			sortText();
+		}*/
+		else if(command == "search"){
+			string word;
+			cin>>word;
+			displaySearch(searchText(word));
 		}
 		else{
 			cout<<"invalid command"<<endl;
