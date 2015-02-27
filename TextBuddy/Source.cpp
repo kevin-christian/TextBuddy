@@ -40,13 +40,13 @@ command: exit
 
 using namespace std;
 
-void TextBuddy::addText(string text, string argv)
+void TextBuddy::addText(string text)
 {
 	TextVector.push_back(text);
-	cout << "added to " << argv<<": '"<<text<<" '"<<endl;
+	cout << "added to " << fileName<<": '"<<text<<" '"<<endl;
 }
 
-void TextBuddy::displayText(string argv)
+void TextBuddy::displayText()
 {
 	if(!TextVector.empty()){
 		vector<string>::iterator iter;
@@ -57,11 +57,11 @@ void TextBuddy::displayText(string argv)
 		}
 	}
 	else{
-		cout << argv << " is empty" << endl;
+		cout << fileName << " is empty" << endl;
 	}
 }
 
-void TextBuddy::deleteText(int textNumber, string argv)
+void TextBuddy::deleteText(int textNumber)
 {
 	vector<string>::iterator iter;
 	iter = TextVector.begin();
@@ -74,37 +74,48 @@ void TextBuddy::deleteText(int textNumber, string argv)
 		cout<<"The text to be deleted does not exist"<<endl; 
 	}
 	else{
-		cout<<"deleted from "<<argv<<": '"<<*iter<<" '"<<endl;
+		cout<<"deleted from "<<fileName<<": '"<<*iter<<" '"<<endl;
 		TextVector.erase(iter);
 	}
 }
 
-void TextBuddy::clearText(string argv)
+void TextBuddy::clearText()
 {
 	while(!TextVector.empty()) {
 		TextVector.pop_back();
 	}
-	cout<<"all content deleted from "<< argv <<endl ;
+	cout<<"all content deleted from "<< fileName <<endl ;
 }
 
-void TextBuddy::processCommand(string argv, string command)
+void TextBuddy::sortText()
+{
+	if(!TextVector.empty()) {
+		sort(TextVector.begin(), TextVector.end());
+	}
+	displayText();
+}
+
+void TextBuddy::processCommand(string command)
 {
 	string text;
 	int textNumber;
 	while(command != "exit") {
 		if(command == "add") {
 			getline(cin, text);
-			addText(text, argv);
+			addText(text);
 		}
 		else if(command == "display") {
-			displayText(argv);	
+			displayText();	
 		}
 		else if(command == "delete"){
 			cin>>textNumber;
-			deleteText(textNumber, argv);
+			deleteText(textNumber);
 		}
 		else if(command == "clear"){
-			clearText(argv);
+			clearText();
+		}
+		else if(command == "sort"){
+			sortText();
 		}
 		else{
 			cout<<"invalid command"<<endl;
@@ -117,30 +128,31 @@ void TextBuddy::processCommand(string argv, string command)
 //finalizeText function saves the final list of text 
 //into the command line parameter, in this case 'mytextfile.txt'   
 //after the user enter the command 'exit' 
-void TextBuddy::finalizeText(string argv)
+void TextBuddy::finalizeText()
 {
-	ofstream finalTextFile(argv);
+	ofstream finalTextFile;
 	vector<string>::iterator iter;
 	int textNumber = 1;
 	if(!TextVector.empty()){
 		for(iter=TextVector.begin(); iter!=TextVector.end(); ++iter){
-			finalTextFile<<textNumber<<"."<<*iter<<endl;
+			finalTextFile << textNumber<<"."<<*iter<<endl;
 			++textNumber;
 		}
 	}
 	finalTextFile.close();
 }
-void TextBuddy::showWelcomeMessage(string argv)
+void TextBuddy::showWelcomeMessage()
 {
-	cout << "Welcome to Textbuddy. " << argv << " is ready for use" << endl;
+	cout << "Welcome to Textbuddy. " << fileName << " is ready for use" << endl;
 	cout << "command: ";
 }
-int main(int argc, char * argv[]) {
-	TextBuddy textBuddy;
-	string command;
-	textBuddy.showWelcomeMessage(argv[1]);
-	cin >> command;
-	textBuddy.processCommand(argv[1], command);
-	textBuddy.finalizeText(argv[1]);
-	return 0;
+
+TextBuddy::TextBuddy(string argv)
+{
+	fileName = argv;
+}
+
+std::vector<std::string> TextBuddy::getTextVector()
+{
+	return TextVector;
 }

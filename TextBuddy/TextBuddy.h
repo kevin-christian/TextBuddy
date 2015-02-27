@@ -7,15 +7,18 @@ class TextBuddy
 {
 private:
 	std::vector<std::string> TextVector;
+	std::string fileName;
 public:
-	void showWelcomeMessage(std::string argv);
-	void addText(std::string text,  std::string argv);
-	void displayText(std::string argv);
-	void deleteText(int textNumber, std::string argv);
-	void clearText(std::string argv);
-	void processCommand(std::string argv, std::string command);
-	void finalizeText(std::string argv);
-
+	void showWelcomeMessage();
+	void addText(std::string text);
+	void displayText();
+	void deleteText(int textNumber);
+	void clearText();
+	void processCommand(std::string command);
+	void finalizeText();
+	void sortText();
+	TextBuddy(std::string argv);
+	std::vector<std::string> getTextVector();
 };
 
 #endif
