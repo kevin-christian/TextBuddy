@@ -129,13 +129,15 @@ void finalizeText(vector<string>& TextVector, string argv)
 	}
 	finalTextFile.close();
 }
-
-
+void showWelcomeMessage(string argv)
+{
+	cout << "Welcome to Textbuddy. " << argv << " is ready for use" << endl;
+	cout << "command: ";
+}
 int main(int argc, char * argv[]) {
 	string command;
 	vector<string> TextVector;
-	cout << "Welcome to Textbuddy. " << argv[1] << " is ready for use" << endl;
-	cout << "command: ";
+	showWelcomeMessage(argv[1]);
 	cin >> command;
 	processCommand(TextVector, argv[1], command);
 	finalizeText(TextVector, argv[1]);
