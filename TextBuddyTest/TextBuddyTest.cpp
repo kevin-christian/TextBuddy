@@ -23,8 +23,23 @@ namespace TextBuddyTest
 			Assert::AreEqual("on top of the tree", tb.searchText("the")[1].c_str());
 			Assert::AreEqual("jumped over the lazy dog", tb.searchText("the")[0].c_str());
 		}
-		TEST_METHOD(AnotherTest) {
-			
+		TEST_METHOD(SortTest) {
+			TextBuddy tb("mytextfile.txt");
+			tb.addText("Mango");
+			tb.addText("Apple");
+			tb.addText("Banana");
+			tb.addText("Cherry");
+			tb.addText("apple");
+			tb.addText("banana split");
+			tb.addText("cherish");
+			tb.sortText();
+			Assert::AreEqual("Apple", tb.getTextVector()[0].c_str());
+			Assert::AreEqual("apple", tb.getTextVector()[1].c_str());
+			Assert::AreEqual("Banana", tb.getTextVector()[2].c_str());
+			Assert::AreEqual("banana split", tb.getTextVector()[3].c_str());
+			Assert::AreEqual("cherish", tb.getTextVector()[4].c_str());
+			Assert::AreEqual("Cherry", tb.getTextVector()[5].c_str());
+			Assert::AreEqual("Mango", tb.getTextVector()[6].c_str());
 		}
 	};
 }
