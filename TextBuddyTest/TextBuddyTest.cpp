@@ -41,23 +41,46 @@ namespace TextBuddyTest
 			Assert::AreEqual(0U, tb.searchText("something").size());
 		}
 
-		TEST_METHOD(SortTest) {
+		TEST_METHOD(SortAlphabetical) {
 			TextBuddy tb("mytextfile.txt");
-			tb.addText("Mango");
+			tb.addText("mango");
 			tb.addText("Apple");
-			tb.addText("Banana");
-			tb.addText("Cherry");
-			tb.addText("apple");
-			tb.addText("banana split");
-			tb.addText("cherish");
+			tb.addText("banana");
+			tb.addText("Guava");
 			tb.sortText();
 			Assert::AreEqual("Apple", tb.getTextVector()[0].c_str());
-			Assert::AreEqual("apple", tb.getTextVector()[1].c_str());
-			Assert::AreEqual("Banana", tb.getTextVector()[2].c_str());
-			Assert::AreEqual("banana split", tb.getTextVector()[3].c_str());
-			Assert::AreEqual("cherish", tb.getTextVector()[4].c_str());
-			Assert::AreEqual("Cherry", tb.getTextVector()[5].c_str());
-			Assert::AreEqual("Mango", tb.getTextVector()[6].c_str());
+			Assert::AreEqual("banana", tb.getTextVector()[1].c_str());
+			Assert::AreEqual("Guava", tb.getTextVector()[2].c_str());
+			Assert::AreEqual("mango", tb.getTextVector()[3].c_str());
+		}
+
+		TEST_METHOD(SortCaseInsensitive){
+			TextBuddy tb("mytextfile.txt");
+			tb.addText("Apple");
+			tb.addText("apple");
+			tb.addText("android");
+			tb.addText("Apple");
+			tb.sortText();
+			Assert::AreEqual("android", tb.getTextVector()[0].c_str());
+			Assert::AreEqual("Apple", tb.getTextVector()[1].c_str());
+			Assert::AreEqual("apple", tb.getTextVector()[2].c_str());
+			Assert::AreEqual("Apple", tb.getTextVector()[3].c_str());
+		}
+
+		TEST_METHOD(SortLongerVsShorterWord){
+			TextBuddy tb("mytextfile.txt");
+			tb.addText("Apple Pie");
+			tb.addText("Apple");
+			tb.addText("Applecake");
+			tb.sortText();
+			Assert::AreEqual("Apple", tb.getTextVector()[0].c_str());
+			Assert::AreEqual("Apple Pie", tb.getTextVector()[1].c_str());
+			Assert::AreEqual("Applecake", tb.getTextVector()[2].c_str());
+		}
+
+		TEST_METHOD(SortEmpty){
+			TextBuddy tb("mytextfile.txt");
+			Assert::AreEqual(0U, tb.getTextVector().size());
 		}
 	};
 }
