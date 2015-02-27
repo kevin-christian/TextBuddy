@@ -36,16 +36,17 @@ command: exit
 #include <fstream>
 #include <string>
 #include <algorithm>
+#include "TextBuddy.h"
 
 using namespace std;
 
-void addText(string text, vector<string>& TextVector, string argv)
+void TextBuddy::addText(string text, string argv)
 {
 	TextVector.push_back(text);
 	cout << "added to " << argv<<": '"<<text<<" '"<<endl;
 }
 
-void displayText(vector<string>& TextVector, string argv)
+void TextBuddy::displayText(string argv)
 {
 	if(!TextVector.empty()){
 		vector<string>::iterator iter;
@@ -60,7 +61,7 @@ void displayText(vector<string>& TextVector, string argv)
 	}
 }
 
-void deleteText(vector<string>& TextVector, int textNumber, string argv)
+void TextBuddy::deleteText(int textNumber, string argv)
 {
 	vector<string>::iterator iter;
 	iter = TextVector.begin();
@@ -78,7 +79,7 @@ void deleteText(vector<string>& TextVector, int textNumber, string argv)
 	}
 }
 
-void clearText(vector<string>& TextVector, string argv)
+void TextBuddy::clearText(string argv)
 {
 	while(!TextVector.empty()) {
 		TextVector.pop_back();
@@ -86,24 +87,24 @@ void clearText(vector<string>& TextVector, string argv)
 	cout<<"all content deleted from "<< argv <<endl ;
 }
 
-void processCommand(vector<string>& TextVector, string argv, string command)
+void TextBuddy::processCommand(string argv, string command)
 {
 	string text;
 	int textNumber;
 	while(command != "exit") {
 		if(command == "add") {
 			getline(cin, text);
-			addText(text, TextVector, argv);
+			addText(text, argv);
 		}
 		else if(command == "display") {
-			displayText(TextVector, argv);	
+			displayText(argv);	
 		}
 		else if(command == "delete"){
 			cin>>textNumber;
-			deleteText(TextVector, textNumber, argv);
+			deleteText(textNumber, argv);
 		}
 		else if(command == "clear"){
-			clearText(TextVector, argv);
+			clearText(argv);
 		}
 		else{
 			cout<<"invalid command"<<endl;
@@ -116,7 +117,7 @@ void processCommand(vector<string>& TextVector, string argv, string command)
 //finalizeText function saves the final list of text 
 //into the command line parameter, in this case 'mytextfile.txt'   
 //after the user enter the command 'exit' 
-void finalizeText(vector<string>& TextVector, string argv)
+void TextBuddy::finalizeText(string argv)
 {
 	ofstream finalTextFile(argv);
 	vector<string>::iterator iter;
@@ -129,17 +130,17 @@ void finalizeText(vector<string>& TextVector, string argv)
 	}
 	finalTextFile.close();
 }
-void showWelcomeMessage(string argv)
+void TextBuddy::showWelcomeMessage(string argv)
 {
 	cout << "Welcome to Textbuddy. " << argv << " is ready for use" << endl;
 	cout << "command: ";
 }
 int main(int argc, char * argv[]) {
+	TextBuddy textBuddy;
 	string command;
-	vector<string> TextVector;
-	showWelcomeMessage(argv[1]);
+	textBuddy.showWelcomeMessage(argv[1]);
 	cin >> command;
-	processCommand(TextVector, argv[1], command);
-	finalizeText(TextVector, argv[1]);
+	textBuddy.processCommand(argv[1], command);
+	textBuddy.finalizeText(argv[1]);
 	return 0;
 }
