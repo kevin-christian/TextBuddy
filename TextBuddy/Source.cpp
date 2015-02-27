@@ -3,18 +3,30 @@ interface.
 * It is assumed that there is no existing file and a new file is executed each time.
 * The file is also saved after each user operation. The command format is given by
 * the example interaction below:
-Welcome to TextBuddy. mytestfile.txt is ready to use.
+Welcome to TextBuddy. mytextfile.txt is ready to use.
 command: add Little Brown Fox
+added to mytextfile.txt " Little Brown Fox "
 command: add jumped over the lazy dog
+added to mytextfile.txt " jumped over the lazy dog "
 command: add jumped over the rainbow
+added to mytextfile.txt " jumped over the rainbow "
 command: display
+1. Little Brown Fox
+2. jumped over the lazy dog
+3. jumped over the rainbow
 command: delete 2
+deleted from mytextfile.txt " jumped over the lazy dog "
 command: display
+1. Little Brown Fox
+2. jumped over the rainbow
 command: add then it runs away
+1. Little Brown Fox
+2. jumped over the rainbow
+3. then it runs away
 command: clear
+all content deleted from mytextfile.txt
 command: display
-command: add Little White Fox
-command: display
+mytextfile.txt is empty
 command: exit
 * @author Kevin Christian
 */
@@ -23,6 +35,7 @@ command: exit
 #include <vector>
 #include <fstream>
 #include <string>
+#include <algorithm>
 
 using namespace std;
 
@@ -116,6 +129,7 @@ void finalizeText(vector<string>& TextVector, string argv)
 	}
 	finalTextFile.close();
 }
+
 
 int main(int argc, char * argv[]) {
 	string command;
