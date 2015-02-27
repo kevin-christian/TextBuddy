@@ -19,6 +19,9 @@ namespace TextBuddyTest
 			tb.addText("played with firefox");
 			tb.addText("on top of the tree");
 			Assert::AreEqual("played with firefox", tb.searchText("fox")[1].c_str());
+			Assert::AreEqual("white fox", tb.searchText("fox")[0].c_str());
+			Assert::AreEqual("on top of the tree", tb.searchText("the")[1].c_str());
+			Assert::AreEqual("jumped over the lazy dog", tb.searchText("the")[0].c_str());
 		}
 		TEST_METHOD(AnotherTest) {
 			
