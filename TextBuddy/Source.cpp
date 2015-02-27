@@ -87,7 +87,7 @@ void TextBuddy::clearText()
 	cout<<"all content deleted from "<< fileName <<endl ;
 }
 
-/*void TextBuddy::sortText()
+void TextBuddy::sortText()
 {
 	if(!TextVector.empty()) {
 		sort(TextVector.begin(), TextVector.end(), [](string a, string b) -> bool {
@@ -102,11 +102,14 @@ void TextBuddy::clearText()
 					return false;
 				}
 			}
+			if(b.size() > a.size()){
 			return true;
+			}
+			return false;
 		});
 	}
 	displayText();
-}*/
+}
 
 vector<string> TextBuddy::searchText(string word)
 {
@@ -155,9 +158,9 @@ void TextBuddy::processCommand(string command)
 		else if(command == "clear"){
 			clearText();
 		}
-		/*else if(command == "sort"){
+		else if(command == "sort"){
 			sortText();
-		}*/
+		}
 		else if(command == "search"){
 			string word;
 			cin>>word;
